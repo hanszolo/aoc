@@ -1,4 +1,4 @@
-// day 3
+// day 4
 parser= (input) => {
 	tokens = input.split(/\s+/)
 	if (!tokens) return undefined

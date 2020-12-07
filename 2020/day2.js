@@ -1,4 +1,4 @@
-// day 1
+// day 2
 re = /^([0-9]+)-([0-9]+) ([a-z]): ([a-z]+)$/
 parser = row => {
 	matches = row.match(re)
