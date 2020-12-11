@@ -1,4 +1,4 @@
-//day 10
+//day 11
 input = document.getElementsByTagName('pre')[0].innerText.trim()
 
 part1 = (input) => {
