@@ -1,4 +1,4 @@
-//day 12
+//day 13
 parser = x => {
 	return {
 		'timestamp': +(x[0]),
@@ -21,14 +21,15 @@ part1 = (input) => {
 console.log(part1(input))
 
 part2 = (input) => {
-	mapping = input.buses.reduce((acc,x,i) => x === 'x' ? acc : Object.assign(acc, {[x]:i}), {})
-	basis = Math.max(...Object.keys(mapping))
-	offset = mapping[basis]
-	return [mapping, basis, offset]
-	for (let i = Math.ceil(1e14 / basis) * basis; i < 1e16; i += basis) {
-		valid = [...Object.keys(mapping)].map(bus => (i - offset + mapping[bus]) % bus === 0)
-		if (valid.every(x=>!!x)) return i - offset;
+	rows = input.buses.map((x, i) => x === "x" ? false : [x, -i]).filter(x => !!x).sort((x,y) => y[0] - x[0])
+	crt = (n,m,a,b) => { // Chinese remainder theorem, returns x such that x % n = a && x % m = b
+		for (let i = 0; i < n; ++i) {
+			if ((i * m + b - a) % n === 0) {
+				return i * m + b
+			}
+		}
 	}
-	return [mapping, basis, offset]
+	result = rows.reduce((x, y) => [x[0] * y[0], crt(y[0], x[0], y[1], x[1])])
+	return result[1]
 }
 console.log(part2(input))
